@@ -21,7 +21,6 @@ jobs:
 
     - name: Build client
       id: build-client
-      env:
       run: |
         npm install
         npm run build
