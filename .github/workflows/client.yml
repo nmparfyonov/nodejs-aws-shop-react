@@ -24,3 +24,5 @@ jobs:
       run: |
         npm install
         echo success npm install
+        npm run build
+        echo success run build
