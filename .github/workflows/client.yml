@@ -1,0 +1,26 @@
+name: Client deployment
+
+on: push
+  branches: 'feat/github-actions'
+
+jobs:
+  deploy:
+    name: Build and push client
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    - name: Use node
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.17.0'
+
+    - name: Build client
+      id: build-client
+      env:
+      run: |
+        npm install
+        npm run build
