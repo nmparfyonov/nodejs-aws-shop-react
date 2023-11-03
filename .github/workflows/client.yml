@@ -19,10 +19,18 @@ jobs:
       with:
         node-version: 14
 
-    - name: Build client
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ vars.AWS_REGION }}
+
+    - name: Build and push client
       id: build-client
       run: |
         npm install
         echo success npm install
         npm run build
         echo success run build
+        aws s3 sync ./dist/ s3://${{ vars.CLIENT_S3_NAME }} --delete
