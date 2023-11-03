@@ -17,10 +17,11 @@ jobs:
     - name: Use node
       uses: actions/setup-node@v3
       with:
-        node-version: 6
+        node-version: 8
 
     - name: Build client
       id: build-client
       run: |
         npm install
+        echo success npm install
         npm run build
