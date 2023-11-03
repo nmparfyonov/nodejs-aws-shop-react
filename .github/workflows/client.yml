@@ -1,7 +1,8 @@
 name: Client deployment
 
-on: push
-  branches: ['feat/github-actions']
+on: 
+  push:
+    branches: ['feat/github-actions']
 
 jobs:
   deploy:
