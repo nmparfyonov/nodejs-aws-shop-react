@@ -25,6 +25,10 @@ Starts the project in dev mode with mocked API on local environment.
 
 Builds the project for production in `dist` folder.
 
+### `deploy`
+
+Builds the project for production in `dist` folder and deploys it to AWS.
+
 ### `preview`
 
 Starts the project in production mode on local environment.
