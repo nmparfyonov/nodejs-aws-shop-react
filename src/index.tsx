@@ -7,16 +7,18 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
+import axios from "axios";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: { refetchOnWindowFocus: false, retry: false, staleTime: Infinity },
   },
 });
+localStorage.setItem("authorization_token", "bm1wYXJmeW9ub3Y6VEVTVF9QQVNTV09SRA==");
 
 if (import.meta.env.DEV) {
   const { worker } = await import("./mocks/browser");
-  worker.start({ onUnhandledRequest: "bypass" });
+  /* worker.start({ onUnhandledRequest: "bypass" }); */
 }
 
 const container = document.getElementById("app");
