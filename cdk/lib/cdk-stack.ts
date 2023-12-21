@@ -35,6 +35,18 @@ export class CdkStack extends cdk.Stack {
     );
 
     const distribution = new CloudFrontWebDistribution(this, 'rs-react-app-cf-distribution', {
+      errorConfigurations: [
+        {
+          errorCode: 403,
+          responseCode: 200,
+          responsePagePath: '/index.html',
+        },
+        {
+          errorCode: 404,
+          responseCode: 200,
+          responsePagePath: '/index.html',
+        },
+      ],
       originConfigs: [
         {
           s3OriginSource: {
