@@ -20,7 +20,19 @@ if (import.meta.env.DEV) {
   const { worker } = await import("./mocks/browser");
   /* worker.start({ onUnhandledRequest: "bypass" }); */
 }
-
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.request.status === 401) {
+      alert('Unauthorized')
+    } else if (error.request.status === 403) {
+      alert('Access Denied')
+    } else {
+      console.log(error)
+    }
+    return Promise.reject(error);
+  }
+);
 const container = document.getElementById("app");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(container!);
