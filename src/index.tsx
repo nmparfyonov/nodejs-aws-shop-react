@@ -7,18 +7,32 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
+import axios from "axios";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: { refetchOnWindowFocus: false, retry: false, staleTime: Infinity },
   },
 });
+localStorage.setItem("authorization_token", "bm1wYXJmeW9ub3Y6VEVTVF9QQVNTV09SRA==");
 
 if (import.meta.env.DEV) {
   const { worker } = await import("./mocks/browser");
-  worker.start({ onUnhandledRequest: "bypass" });
+  /* worker.start({ onUnhandledRequest: "bypass" }); */
 }
-
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.request.status === 401) {
+      alert('Unauthorized')
+    } else if (error.request.status === 403) {
+      alert('Access Denied')
+    } else {
+      console.log(error)
+    }
+    return Promise.reject(error);
+  }
+);
 const container = document.getElementById("app");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const root = createRoot(container!);
