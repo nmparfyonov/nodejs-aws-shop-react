@@ -46,19 +46,6 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     console.log("Result: ", result);
     setFile(undefined);
   };
-  axios.interceptors.response.use(
-    (response) => response,
-    (error) => {
-      if (error.request.status === 401) {
-        alert('Unauthorized')
-      } else if (error.request.status === 403) {
-        alert('Access Denied')
-      } else {
-        console.log(error)
-      }
-      return Promise.reject(error);
-    }
-  );
   return (
     <Box>
       <Typography variant="h6" gutterBottom>
